@@ -1,4 +1,7 @@
 <?php
+
+require_once('checkCookies.php');
+
 $id=$_GET["PID"];
 var_dump($id);
 define("DB_SERVER","localhost");
@@ -35,4 +38,14 @@ $result = mysqli_query($conn,"SELECT * FROM products WHERE PID ='.$id.' ");
 </table>
  </form>
 </body>
+
+<script>
+$(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 </html>

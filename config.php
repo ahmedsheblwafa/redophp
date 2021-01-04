@@ -1,4 +1,7 @@
 <?php 
+
+require_once('checkCookies.php');
+
 $dsn = "mysql:dbname=cafetria;dbhost=127.0.0.1;dbport=3306";
 
 define("dbuser","root");
@@ -13,3 +16,13 @@ catch(PDOException $e){
 
 
 ?>
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>

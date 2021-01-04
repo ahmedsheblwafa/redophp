@@ -1,4 +1,7 @@
 <?php
+
+require_once('checkCookies.php');
+
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
@@ -214,6 +217,8 @@ $result = mysqli_query($conn,"SELECT name ,price,image FROM products");
         <a href="users.html" class="nav-item nav-link ">Users</a>
         <a href="#" class="nav-item nav-link ">Manual Order</a>
         <a href="#" class="nav-item nav-link ">Checks</a>
+        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
+
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <div class="container-xl">
@@ -253,6 +258,16 @@ $result = mysqli_query($conn,"SELECT name ,price,image FROM products");
                     </tbody>
                 </table> 
 </body>
+
+<script>
+$(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 
 </html>
 

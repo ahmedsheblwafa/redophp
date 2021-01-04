@@ -1,4 +1,8 @@
+<?php
+// require_once('checkCookies.php');
+?>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -134,8 +138,19 @@
     </div>
 </form>
     
-    
 </body>
+
+<script>
+$(".logout").click(function () {
+        $.post('checkCookies.php',{
+            cook: 'delete'
+        },function(){
+           window.location.replace("login.php");
+        });
+    })
+    </script>
+
+
 </html>
 
 
@@ -171,9 +186,6 @@ $db= new PDO($dsn,DB_USER,DB_PASS);
 // else{
 // 	echo"fail";
 // }
-// selecting Database
-
-// $db_select= mysqli_select_db($conn,DB_NAME);
 
 // check the submit button is clicked or not
 if(isset($_POST['submit']))
@@ -200,28 +212,22 @@ if(isset($_POST['submit']))
 	$numberofrows  = count($row_count);
 	
     if($numberofrows==1){
+        
+        setcookie('login','true');
+        setcookie('userID',$row_count[0]['UID']);
 		
-        //user available and login success
-		// $_SESSION ['login']= '<div class="success text-center"> login success </div>';
 		
         $_SESSION ['usertype']= $row_count[0]['role'];
 
-        
-        // session_start();
-      
-
-        $_SESSION['email']= $email;  // Initializing Session with value of PHP Variable
-        echo $_SESSION['email'];   
-        $_SESSION['password']= $pasword;  // Initializing Session with value of PHP Variable
-        echo $_SESSION['password'];
-        setcookie("nameandmail",$_SESSION["email"]." ".$_SESSION["password"],time()+(86400),'/');
-        
-
 		// echo $_SESSION ['usertype'];
 		if($_SESSION ['usertype']=="user")
-		{header('location: newuserhome.php');}
+		{
+            setcookie('userRole','user');
+            header('location: newuserhome.php');}
 		else
-		{header('location: adminmenue.php');}
+        {
+            setcookie('userRole','admin');
+            header('location: adminmenue.php');}
 		
 	}
 

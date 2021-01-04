@@ -1,4 +1,6 @@
-<?php require_once("config.php") ; 
+<?php require_once("config.php") ;
+
+require_once('checkCookies.php');
 
 ?>
 <?php
@@ -28,3 +30,4 @@ header("Location: ./adminmenue.php");
 
 // }
 ?>
+

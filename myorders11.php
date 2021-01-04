@@ -1,4 +1,7 @@
 <?php
+
+require_once('checkCookies.php'); 
+
 define("DB_SERVER","localhost");
 define("DB_USER","root");
 define("DB_PASS","");
@@ -156,6 +159,8 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="newuserhome.php" class="nav-item nav-link " style="color: #fbb448;">Home</a>
         <a href="#" class="nav-item nav-link active">My Orders</a>
+        <button type="button" class="logout"><a href="#" class="nav-item nav-link ">LogOut</a></button>
+
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -245,6 +250,19 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
         </div>
     </div>
 </body>
+
+<script>
+
+
+$(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+
+</script>
 
 </html>
 

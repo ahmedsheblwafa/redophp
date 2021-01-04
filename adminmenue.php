@@ -1,4 +1,7 @@
-<?php require_once("userhome.php") ; 
+<?php
+
+ require_once('checkCookies.php');
+ require_once("userhome.php") ; 
 $prouct = new products();
 $prouct->connectdb();
 ?>
@@ -403,6 +406,16 @@ $prouct->connectdb();
     <script src="js/userhome.js"></script>
 
 </body>
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 
 </html>
 

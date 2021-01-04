@@ -1,4 +1,8 @@
 <?php
+
+require_once('checkCookies.php');
+
+
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
@@ -276,5 +280,16 @@ $result=mysqli_query($conn,"select op.Quantity,p.Pname,o.OrderDate,p.PPicPath,u.
         </div>
     </div>
 </body>
+
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 
 </html>

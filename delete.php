@@ -1,4 +1,7 @@
 <?php
+
+require_once('checkCookies.php');
+
 $id = $_GET['PID'];
 define("DB_SERVER","localhost");
 define("DB_USER","root");
@@ -25,4 +28,13 @@ $delete = mysqli_query($conn,$sql);?>
 
 </div>
 
+<script>
+$(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+</script>
 

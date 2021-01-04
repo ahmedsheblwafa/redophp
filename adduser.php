@@ -1,3 +1,15 @@
+<?php
+
+require_once('checkCookies.php');
+
+if($_COOKIE['userRole'] == 'user'){
+    header('Location: ./adminmenue.php');
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,6 +126,16 @@ if (isset($_POST['submit'])) {
 
     }
 ?>
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 
     
     

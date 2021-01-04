@@ -213,6 +213,7 @@
         <a href="users.html" class="nav-item nav-link ">Users</a>
         <a href="#" class="nav-item nav-link ">Manual Order</a>
         <a href="#" class="nav-item nav-link ">Checks</a>
+        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <div class="container-xl">
@@ -267,5 +268,16 @@
         </div>
     </div>
 </body>
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
+
 
 </html>

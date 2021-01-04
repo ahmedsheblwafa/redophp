@@ -1,6 +1,9 @@
 
+<?php 
 
-<?php require_once("userhome.php") ; 
+require_once('checkCookies.php');
+
+require_once("userhome.php") ; 
 $prouct = new products();
 $prouct->connectdb();
 ?>
@@ -43,6 +46,7 @@ $prouct->connectdb();
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="#" class="nav-item nav-link active">Home</a>
         <a href="myorders11.php" class="nav-item nav-link" style="color: #fbb448;">My Orders</a>
+        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -401,6 +405,16 @@ $prouct->connectdb();
             $input.val(parseInt($val) + 1);
         }
     });
+
+  
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        
     
 </script>
 

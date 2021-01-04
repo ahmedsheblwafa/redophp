@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+require_once('checkCookies.php');
+?>
 <html>
 
 <head>
@@ -84,6 +87,17 @@
             
         });
 
+        
+
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+      
+
     
 
         // add and minus
@@ -108,6 +122,7 @@
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link active"style="color: #fbb448;" >Checks</a>
+        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -283,6 +298,7 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 }
+
 
  ?>
 

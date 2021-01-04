@@ -1,3 +1,7 @@
+<?php
+require_once('checkCookies.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,6 +127,15 @@
     
     
 </body>
+<script>
+$(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 </html>
 
 

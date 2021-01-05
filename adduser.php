@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
 
     $emailquery = "select * from systemuser where email ='$email'";
     $query = mysqli_num_rows($conn,$emailquery);
-
+    $emailcount = mysqli_num_rows($query);
     if($emailcount>0){
         echo "email already exists";
     }else{

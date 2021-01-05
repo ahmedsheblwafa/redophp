@@ -138,20 +138,7 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-    <script>
-        // view and hide
-        $(function () {
-            $('tr.parent td span.btn')
-                .on("click", function () {
-                    var idOfParent = $(this).parents('tr').attr('id');
-                    $('tr.child-' + idOfParent).toggle('fast');
-                });
-            $('tr[class^=child-]').hide().children('td');
-        });
-
-        // add and minus
-
-    </script>
+   
 </head>
 
 <body>
@@ -193,67 +180,84 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
     </table>
     <form>
 
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
+
+
+
+
+
+
+
+
+
+
+    
                 <table class="table table-striped table-hover">
                     <thead class="table-title">
                         <tr>
                             <th style="width: 20%;">Order Date</th>
-                            <th style="width: 2%;"></th>
                             <th style="width: 15%;"> Status</th>
                             <th style="width: 15%;">Price</th>
                             <th style="width: 15%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+
                     <?php
-                    $from='2021-04-04 00:40:29';
-                    $to='2021-01-01 00:40:29';
-                    $result = mysqli_query($conn,"SELECT o.OrderDate ,o.Status ,p.Price ,p.PPicPath ,p.PID 
-                    FROM orders o,products p,`order-product` op 
-                    where o.OID=op.OID
-                    and p.PID=op.PID
-                    and OrderDate between '2021-04-04 00:40:29' and '2021-01-01 00:40:29' ");
-                    
-                    
-                    while ($row = mysqli_fetch_array($result)){
+                    $result = mysqli_query($conn,"SELECT OID  FROM orders");
+                       while ($row = $result->fetch_assoc()){
+                         
+                         $id =$row['OID'];  
+                        $result2 = mysqli_query($conn,"SELECT`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
+                        products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                        from `order-product`, products, Orders,systemuser 
+                        WHERE Orders.OID=`order-product`.OID 
+                        and `order-product`.PID=products.PID 
+                        and Orders.UserId=systemuser.UID
+                        and orders.OID= $id
+                    ");
+                        $row3 = $result2->fetch_assoc();
+                      echo
+                       ' 
+                        <tr class="parent">
+                      <td>'.$row3["OrderDate"].'</td>
+                      <td><span class="btn">+</span></td>
+                      <td>
+                 <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9; </i>Cancel Order</a>
+                            </td>
+                      </tr>';
+                    // echo"<tr class='parent' id='1'>";
+                    echo "<tr class='child-'>";
+                    while ($row2 = $result2->fetch_assoc()){
                           echo
-                       ' <tr class="parent" id="1">
-                            <td>'.$row["OrderDate"].'</td>
-                            <td><span class="btn">+</span></td>
-                            <td>'.$row["Status"].'</td>
-                            <td>'.$row["Price"].'</td>
-                            <td>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-                                            class="material-icons">&#xE5C9; </i>Cancel Order</a>
-                            </td>
-                        </tr>
-                        <tr class="child-1" >
-                            <td colspan="10"style=" align-content: center; position: absolute" >
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2 d-inline-block">
-                                        <img src=" '.$row["PPicPath"].'">
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled></button>
-                                        </div>
-                                   
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>';}
+                       '
+                         <td>'.$row2["PPicPath"].'</td>
+                        <td>'.$row2["Quantity"].'</td>
+                        <td>'.$row2["Price"].'</td>'
+                            ;}}
+                            echo "</tr>";
+                           
                         ?>
+                    <?php
+                    //   echo"<tr class='child-'>";
+                    //   echo"<td style='width:15%; display:inline-block'>" ."<img style='width:50px;' src='".$row2['PPicPath']. "'> <br>" .$row2['Quantity']."</td>";  
+                    //   echo"</tr>";}
+                    ?>
                     </tbody>
-                </table>
-                
-            </div>
-        </div>
-    </div>
+                </table>     
+                <script>
+        // view and hide
+        $(function () {
+            $('.parent')
+                .on("click", function () {
+                    $(this).next().toggle();
+                    // var idOfParent = $(this).parents('tr').attr('id');
+                 // $('tr.child-' + idOfParent).toggle('fast');
+                });
+            $('.child-').hide().children('td');
+        });
+    </script> 
 </body>
-
 <script>
-
-
 $(".logout").click(function () {
             $.post('checkCookies.php',{
                 cook: 'delete'
@@ -263,6 +267,7 @@ $(".logout").click(function () {
         })
 
 </script>
+
 
 </html>
 

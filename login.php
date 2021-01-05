@@ -197,7 +197,7 @@ if(isset($_POST['submit']))
     $password= $_POST['password'];
 
     //2-sql to check the user with email and password exist and not
-	$sql= "SELECT role FROM systemuser WHERE Email='$email' AND Password='$password';";
+	$sql= "SELECT * FROM systemuser WHERE Email='$email' AND Password='$password';";
   
     $stmt=$db->prepare($sql);
 
@@ -216,18 +216,20 @@ if(isset($_POST['submit']))
         setcookie('login','true');
         setcookie('userID',$row_count[0]['UID']);
 		
-		
+		// var_dump($row_count[0]['UID']);
         $_SESSION ['usertype']= $row_count[0]['role'];
 
 		// echo $_SESSION ['usertype'];
 		if($_SESSION ['usertype']=="user")
 		{
             setcookie('userRole','user');
-            header('location: newuserhome.php');}
+            header('location: newuserhome.php');
+        }
 		else
         {
             setcookie('userRole','admin');
-            header('location: adminmenue.php');}
+            header('location: adminmenue.php');
+        }
 		
 	}
 

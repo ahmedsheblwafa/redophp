@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-require_once('checkCookies.php');
-?>
 <html>
 
 <head>
@@ -74,29 +71,28 @@ require_once('checkCookies.php');
         .progress {
             height: 10px;
         }
+        img{
+            width:120px;
+            height:100px
+        }
     </style>
     <script>
-        // view and hide
+       
         $(function () {
-            $('tr.parent td span.btn')
+            $('.col-5').hide();
+            $('tr.parent')
                 .on("click", function () {
-                    var idOfParent = $(this).parents('tr').attr('id');
-                    $('tr.child-' + idOfParent).toggle('fast');
+                    
+                   
+                    
+                     $(this).parent().parent().next().next().next().next().next().toggle();
+                    // console.log(idOfParent);
+                    // $('tr.child-' + idOfParent).toggle('fast');
                 });
-            $('tr[class^=child-]').hide().children('td');
+                
+            // $('tr[class^=child-]').hide().children('td');
             
         });
-
-        
-
-    $(".logout").click(function () {
-            $.post('checkCookies.php',{
-                cook: 'delete'
-            },function(){
-               window.location.replace("login.php");
-            });
-        })
-      
 
     
 
@@ -122,7 +118,6 @@ require_once('checkCookies.php');
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link active"style="color: #fbb448;" >Checks</a>
-        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -175,7 +170,7 @@ if($db){
       
                 
                     
-       echo "<option >".$row['Name']."</option>";
+       echo "<option value=".$row['Name'].">".$row['Name']."</option>";
       }
 
                    
@@ -202,7 +197,13 @@ $to=$_POST["to"];}
 if (isset($_POST["submit"])){
 if($db){
     if($user=='All users'){
-        $selQr="SELECT`order-product`.Quantity ,products.price ,products.Pname,Orders.OrderDate,systemuser.Name from `order-product`, products, Orders,systemuser WHERE Orders.OID=`order-product`.OID and `order-product`.PID=products.PID and Orders.UserId=systemuser.UID and OrderDate between '$from' and '$to'";
+        $selQr="SELECT`order-product`.Quantity ,products.price,products.Pname,products.Category ,
+        products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+        from `order-product`, products, Orders,systemuser 
+        WHERE Orders.OID=`order-product`.OID 
+        and `order-product`.PID=products.PID 
+        and Orders.UserId=systemuser.UID 
+        and OrderDate between '$from' and '$to'";
         
         $stmt=$db->prepare($selQr);
         $res=$stmt->execute();
@@ -215,25 +216,40 @@ if($db){
                             <h4>Name</h4>
                         </td>
                         <td style='width:40% ;'>
-                            <h4>Total Amount</h4>
+                            <h4>role</h4>
                         </td>
                     </tr>
                     <tr class='parent' id='1'>
                    
                 <td ><span class='btn btn-default'>+</span>".$row['Name']." </td> 
-                <td style='text-align: center;'><span class='btn btn-default'>+</span>".$row['Quantity']."</td>
+                <td style='text-align: center;'><span class='btn btn-default'>+</span>".$row['role']."</td>
              
                </tr>
                <tr class='child-1'>
                 <table class='table col-5' style='text-align: left ;left: 30%; margin-top: 2%;'>
                 <tr class='child-1'  style='background-color: rgba(42, 41, 41, 0.762); color: #fbb448; text-align: center;'>
                    <td>Order Date</td>
-                   <td>Amount</td>
+                   <td>Total  Amount</td>
+                   
+                   <td>Product</td>
+                   <td>Price</td>
+                   <td>Category</td>
+                   <td> </td>
+                   <td></td>
+
+
+
+
                </tr>
               <tr class='child-1'>
-                   <td>".$row['OrderDate']."</td>
-                   <td>".$row['price']."</td>
-              
+                 <td><br>".$row['OrderDate']."</td>
+                 <td><br>".$row['Quantity']."</td>
+
+                   <br><td><br>".$row['price']."</td>
+                   <br><td><br>".$row['Pname']."</td>
+                   <br><td><br>".$row['Category']."</td>
+                   <br><td><br>".$row['Status']."</td>
+                   <td><img src='images/".$row['PPicPath']."'></td>
            
            ";
                        
@@ -249,44 +265,71 @@ if($db){
     }
 else{
     
-$selQr="SELECT`order-product`.Quantity ,products.price ,Orders.OrderDate from `order-product`, products, Orders,systemuser WHERE Name='$user'and Orders.OID=`order-product`.OID and `order-product`.PID=products.PID and Orders.UserId=systemuser.UID and OrderDate between '$from' and '$to' ";
+    $selQr="SELECT`order-product`.Quantity ,products.price,products.Pname,products.Category ,
+    products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+    from `order-product`, products, Orders,systemuser 
+    WHERE Orders.OID=`order-product`.OID 
+    and `order-product`.PID=products.PID 
+    and Orders.UserId=systemuser.UID 
+    and systemuser.Name='$user'
+    and OrderDate between '$from' and '$to'";
 
 $stmt=$db->prepare($selQr);
 $res=$stmt->execute();
 $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($rows as $row){ 
-        echo " <table class='table col-6' style='text-align: left ;left: 25%; margin-top: 2%;'>
-        <tbody>
+
+     foreach($rows as $row)
+        {echo "<table class='table col-6' style='text-align: left ;left: 25%; margin-top: 2%;'>
+        
+        <th>
             <tr style='background-color: rgba(42, 41, 41, 0.762); color: #fbb448; text-align: center;'>
                 <td style='width: 60%;'>
                     <h4>Name</h4>
                 </td>
                 <td style='width:40% ;'>
-                    <h4>Total Amount</h4>
+                    <h4>role</h4>
                 </td>
             </tr>
+            </th>
             <tr class='parent' id='1'>
+            
            
         <td ><span class='btn btn-default'>+</span>".$user." </td> 
-        <td style='text-align: center;'><span class='btn btn-default'>+</span>".$row['Quantity']."</td>
+        <td style='text-align: center;'><span class='btn btn-default'>+</span>".$row['role']."</td>
      
-       </tr>
-       <tr class='child-1'>
-        <table class='table col-5' style='text-align: left ;left: 30%; margin-top: 2%;'>
-        <tr class='child-1'  style='background-color: rgba(42, 41, 41, 0.762); color: #fbb448; text-align: center;'>
-           <td>Order Date</td>
-           <td>Amount</td>
-       </tr>
-      <tr class='child-1'>
-           <td>".$row['OrderDate']."</td>
-           <td>".$row['price']."</td>
-      
-   
-   ";
-               
+       </tr></table><br>";
        
-      }
- echo " </tr></table></tr></tbody></table>";
+        
+                        
+                            
+                        echo "
+                            <table class='table col-5' style='text-align: left ;left: 30%; margin-top: 2%;'>
+                            <tr class='child-1'  style='background-color: rgba(42, 41, 41, 0.762); color: #fbb448; text-align: center;'>
+                            <td>Order Date</td>   
+                            <td>Total Amount</td>
+                            
+                            <td>Price</td>
+                            <td>Product</td>
+                            <td>Category</td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        
+                        <tr class='child-1'>
+                            <td><br>".$row['OrderDate']."</td>
+                            <td><br>".$row['Quantity']."</td>
+                            <td><br>".$row['price']."</td>
+                            <br><td><br>".$row['Pname']."</td>
+                            <br><td><br>".$row['Category']."</td>
+                            <br><td><br>".$row['Status']."</td>
+
+                            <td><img src='images/".$row['PPicPath']. "'></td>
+                    
+                    
+                    ";}
+                                
+                        
+                        
 
 }
 
@@ -298,7 +341,6 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 }
-
 
  ?>
 

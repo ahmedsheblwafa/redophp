@@ -1,33 +1,36 @@
 <?php
-
 require_once('checkCookies.php');
-
-$id = $_GET['PID'];
+require_once("functions.php");
 define("DB_SERVER","localhost");
 define("DB_USER","root");
 define("DB_PASS","");
 define("DB_NAME", "cafetria");
 define("DB_PORT","3306");
 $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
-$result= mysqli_query($conn,"SELECT * FROM products WHERE PID='.$id.' ");
-$sql="DELETE from products WHERE PID='.$id.'";
-$delete = mysqli_query($conn,$sql);?>
-
-<div id="content">
-  <a class="back-link" href="">&laquo; Back to List</a>
-  <div class="subject delete">
-    <h1>Delete Product</h1>
-    <p>Are you sure you want to delete this product?</p>
-    <p class="item"><?php echo $result['Pname']; ?></p>
-    <form  action="<?php echo 'editproduct.php?PID='.$result['PID']; ?>" method="post">
-      <div id="operations">
-        <input type="submit" name="commit" value="Delete product" />
-      </div>
-    </form>
-  </div>
-
-</div>
-
+$id=$_GET['id'] ?? "1";
+$sql="SELECT * FROM products ";
+$sql .= "WHERE PID='". $id."';";
+$result=mysqli_query($conn,$sql);
+$product=mysqli_fetch_array($result);
+function redirect_to($location) {
+  header("Location: " . $location);
+  exit;
+}
+if(isset($id)){
+    $sql = "DELETE FROM products ";
+    $sql .= "WHERE PID='" . $id . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    redirect_to('allproducts.php');
+}
+    // For DELETE statements, $result is true/false
+    else{
+      // DELETE failed
+      echo mysqli_error($conn);
+      exit;
+    }
+?>
+</div> -->
 <script>
 $(".logout").click(function () {
             $.post('checkCookies.php',{
@@ -38,3 +41,5 @@ $(".logout").click(function () {
         })
 </script>
 
+</body>
+</html>

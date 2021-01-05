@@ -1,14 +1,15 @@
 <?php
 
 require_once('checkCookies.php');
-
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "cafetria");
 define("DB_PORT","3306");
+
 $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
 $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
+
 // var_dump($result);
 ?>
 <!DOCTYPE html>
@@ -243,12 +244,15 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                         </tr>
                     </thead>
                     <tbody>
+                        
                   <?php while($row=mysqli_fetch_array($result)) {
                         echo "<tr>";
                         echo"<td>" .$row['Pname']."</td>";
                          echo"<td>" .$row['Price']."</td>";
                        echo"<td><img style='width:125px;height:100px' src='".$row['PPicPath']."'></td>";
                        echo "<td>";?>
+                      <a class="action" href="<?php echo 'showproduct.php?id='.$row['PID']; ?>">          
+                      <i class="fas fa-eye"></i>
                     <a class="action" href="<?php echo 'editproduct.php?id='.$row['PID']; ?>">   
                       <i class='fa fa-pencil' style='color:#fbb448;'></i></a>
                       <a class="action" href="<?php echo 'delete.php?id='.$row['PID']; ?>">          

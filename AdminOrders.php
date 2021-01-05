@@ -1,33 +1,33 @@
 <?php
-
 require_once('checkCookies.php');
-
-
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "cafetria");
 define("DB_PORT","3306");
 $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
-$result=mysqli_query($conn,"select op.Quantity,p.Pname,o.OrderDate,p.PPicPath,u.name,u.ext,u.RoomNo FROM `order-product` op,products p,orders o,systemuser u where o.OID=op.OID and P.PID=op.PID and o.userid=u.uid
+$result=mysqli_query($conn,"SELECT`order-product`.Quantity ,products.price,products.Pname,products.Category ,
+products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+from `order-product`, products, Orders,systemuser 
+WHERE Orders.OID=`order-product`.OID 
+and `order-product`.PID=products.PID 
 ");
-// var_dump($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Orders</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Orders</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<style>
         body {
             font-family: "Kaushan Script", cursive !important;
         }
@@ -196,7 +196,8 @@ $result=mysqli_query($conn,"select op.Quantity,p.Pname,o.OrderDate,p.PPicPath,u.
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if(isset($_POST['from']) && ($_POST['to'])){
+                      <?php
+                        
                          while($row=mysqli_fetch_array($result)){
                          echo"<tr>";
                          echo"<td>" .$row['OrderDate']."</td>";
@@ -218,8 +219,8 @@ $result=mysqli_query($conn,"select op.Quantity,p.Pname,o.OrderDate,p.PPicPath,u.
                             </td>";
                          echo"</tr>" ;
                             echo"<tr>";
-                            echo"<td style='width:15%; display:inline-block'>" ."<img style='' src='".$row['PPicPath']."'> <br>" .$row['Quantity']."</td>";  
-                            echo"</tr>";}} ?>
+                            echo"<td style='width:15%; display:inline-block'>" ."<img style='width:10px;' src='".$row['PPicPath']. "'> <br>" .$row['Quantity']."</td>";  
+                            echo"</tr>";}?>
                         <tr>
                             <!-- <td colspan="20" style=" align-content: center; position: absolute">
                                 <div class="card rounded shadow-sm border-0 d-inline-block">

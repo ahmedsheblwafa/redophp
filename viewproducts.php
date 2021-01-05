@@ -1,6 +1,5 @@
 <?php
 require_once('checkCookies.php');
-
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
@@ -25,7 +24,7 @@ $result = mysqli_query($conn,"SELECT Pname ,Price,PPicPath FROM products");
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
 <style>
 
-        .table-responsive {
+       .table-responsive {
             margin: 30px 0;
         }
 
@@ -87,14 +86,6 @@ $result = mysqli_query($conn,"SELECT Pname ,Price,PPicPath FROM products");
             padding: 12px 15px;
             vertical-align: middle;
         }
-/* 
-        table.table tr th:first-child {
-            width: fit-content;
-        }
-
-        table.table tr th:last-child {
-            width: 100px;
-        } */
 
         table.table-striped tbody tr:nth-of-type(odd) {
             background-color: #fcfcfc;
@@ -217,8 +208,6 @@ $result = mysqli_query($conn,"SELECT Pname ,Price,PPicPath FROM products");
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
         <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
-
-        <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <div class="container-xl">
         <div class="table-responsive">

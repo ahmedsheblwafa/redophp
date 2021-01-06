@@ -203,12 +203,14 @@ if(isset($_POST['submit']))
 		
         //user available and login success
 		// $_SESSION ['login']= '<div class="success text-center"> login success </div>';
+        session_start();
 		
         $_SESSION ['usertype']= $row_count[0]['role'];
 
         
-        session_start();
       
+        setcookie('login','true');
+        setcookie('login',$id);
 
         $_SESSION['email']= $email;  // Initializing Session with value of PHP Variable
         echo $_SESSION['email'];   

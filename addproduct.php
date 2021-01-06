@@ -18,7 +18,7 @@ define("DB_NAME", "cafetria");
 define("DB_PORT","3306");
 
 $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
-$valid=$nameErr=$priceErr=$catErr='';
+$valid=$nameErr=$priceErr=$catErr=$imgErr='';
 $set_name=$set_email='';   
 
 
@@ -68,7 +68,7 @@ if(empty($price)){
   // Validation for allowed extensions .in_array() function searches an array for a specific value.
   if(!in_array($extension,$allowed_extensions))
   {
-  echo "<p>'Invalid format. Only jpg / jpeg/ png /gif format allowed'</p>";
+  $imgErr="<br>'Invalid format. Only jpg / jpeg/ png /gif format allowed'";
   }
   else
   {
@@ -203,12 +203,16 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
             </select> 
                 <p class="err-msg">
            <?php if($catErr!=1){ echo $catErr; }?>
-           </p>
-            </div>
+        </p>
     </div>
-            <div class="row my-3">
-                <div class="col-lg-3  "><label for="name">Product pic :</label></div>
-                <div class="col-lg-3">    <input class="col-3" type="file" value="browse" name="img"></div>
+</div>
+<div class="row my-3">
+    <div class="col-lg-3  "><label for="name">Product pic :</label></div>
+    <div class="col-lg-3">    <input class="col-3" type="file" value="browse" name="img">
+    <p class="err-msg">
+    <?php if($imgErr!=1){ echo $imgErr; }?>
+    </p>
+            </div>
             </div>
             <div class="row my-3 text-center ">
                 <input class="col-2" type="submit" name="submit">

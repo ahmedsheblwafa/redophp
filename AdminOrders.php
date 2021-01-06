@@ -262,7 +262,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                          <input name='OID' type='hidden' value='".$row['OID']."'>";
                             if($row['Status']=="deliverd"){
                        echo" <input name='submit2' type='submit' disabled value='delivered' class='btn btn-secondary'>"; }
-                            else{echo" <input name='submit2' type='submit'  value='deliver'class='btn btn-success'>"; }
+                            else{echo" <input name='submit2' type='submit'  value='pending'class='btn btn-success'>"; }
                     
                     echo "</form>
                     </td></tr><tr>";

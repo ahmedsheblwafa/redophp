@@ -147,7 +147,6 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
         <a href="newuserhome.php" class="nav-item nav-link " style="color: #fbb448;">Home</a>
         <a href="#" class="nav-item nav-link active">My Orders</a>
         <button type="button" class="logout"><a href="#" class="nav-item nav-link ">LogOut</a></button>
-
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -205,7 +204,6 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
 
                          ?>
                          <?php
-                         
                          if(isset($_POST['submit'])){
                     //  var_dump(strtotime($_POST['from']));
                            $from=$_POST['from'];
@@ -252,7 +250,13 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                        $sum+= ($row['Price']*$row['Quantity']);
                             }
                     echo "<td>".$sum."</td>";
-                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9; </i>Cancel Order</a>
+                       echo"<td>
+                       <form method='POST' action=''>
+                            <input name='OID' type='hidden' value='".$row['OID']."'>
+                            <input name='submit2' type='submit'  value='Delete'class='btn btn-danger'> 
+
+                       
+                       </form>
                        </td></tr><tr>";
 
                           foreach($rows2 as $row){
@@ -267,21 +271,40 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                             echo"</td>
                             ";
 
-
-
-
-
-
-
-
                           }
                           echo "</tr>";
                
                 }}}
+                
                         ?>
+                        
                    
                     </tbody>
                 </table> 
+                <?php 
+                if(isset($_POST['submit2'])){
+                    $delete=$_POST['OID'];
+                    $selQry2=" Delete  FROM orders WHERE OID=$delete";
+               
+                    $stmt2=$db->prepare($selQry2);
+                    $res2=$stmt2->execute();
+                    $delete=$_POST['OID'];
+                    $selQry3=" Delete FROM `order-product` WHERE OID=$delete";
+               
+                    $stmt3=$db->prepare($selQry3);
+                    $res3=$stmt3->execute();
+                }
+                
+
+
+
+                
+
+
+
+
+
+                ?>
                 
                 
                 <!-- <script>

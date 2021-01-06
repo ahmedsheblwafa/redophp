@@ -153,7 +153,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
-            <img src=logo_size.jpg> My Orders <img src=logo_size.jpg>
+            <img src=logo_size.jpg>  Orders by all users <img src=logo_size.jpg>
         </h1>
     </div>
     <form method="post" action="">
@@ -185,9 +185,13 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                         <tr>
                             <th style="width: 20%;">Name</th>
                             <th style="width: 20%;">Order Date</th>
-                            <th style="width: 15%;"> Status</th>
-                            <th style="width: 15%;"> total price</th>
+                            <th style="width: 20%;">RoomNo</th>
+
+                            <th style="width: 15%;"> Total Price</th>
+                    
+                            <th style="width: 15%;"> Ext.</th>
                             <th style="width: 15%;">Action</th>
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -214,7 +218,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                            $to=$_POST['to'];
                             $userid = $_COOKIE['userID'];
                             $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
-                            products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                            products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role,systemuser.RoomNo,systemuser.Ext
                             from `order-product`, products, Orders,systemuser 
                             WHERE Orders.OID=`order-product`.OID 
                             and `order-product`.PID=products.PID 
@@ -235,7 +239,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                       { 
                         $userid = $_COOKIE['userID'];
                           $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
-                       products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                       products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role,systemuser.RoomNo,systemuser.Ext
                        from `order-product`, products, Orders,systemuser 
                        WHERE Orders.OID=`order-product`.OID 
                        and `order-product`.PID=products.PID 
@@ -246,13 +250,14 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                        $res2=$stmt2->execute();
                        $rows2=$stmt2->fetchAll(PDO::FETCH_ASSOC);
                        if(!count($rows2)==0){
-                       echo"<tr> <td>".$rows2[0]['Name']."</td><td>".$rows2[0]['OrderDate']."</td><td>".$rows2[0]['Status']."</td>";
+                       echo"<tr> <td>".$rows2[0]['Name']."</td><td>".$rows2[0]['OrderDate']."</td><td>".$rows2[0]['RoomNo']."</td>"
+                       ."<td>".$rows2[0]['Ext']."</td>";
                        $sum = 0;
                        foreach($rows2 as $row){
                        $sum+= ($row['Price']*$row['Quantity']);
                             }
                     echo "<td>".$sum."</td>";
-                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9; </i>Cancel Order</a>
+                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'> deliver</a>
                        </td></tr><tr>";
 
                           foreach($rows2 as $row){

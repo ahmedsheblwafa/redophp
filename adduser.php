@@ -29,6 +29,7 @@ if (isset($_POST['submit'])){
     $password = $_POST['password'];
     $repass = $_POST['repassword'];
     $Ext = $_POST['ext'];
+    // $role=$_POST['role'];
 
     $validName="/^[a-zA-Z ]*$/";
     $validEmail="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
@@ -81,10 +82,8 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 {
    $valid="All fields are validated successfully";
    $insertquery = "INSERT INTO systemuser(Name, Email, Password) VALUES ('$name','$email','$password')";
-
    echo '<script>alert("New Record is added successfully")</script>'; 
-   
-   if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext')")){
+   if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext,Role) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext','user')")){
    //                 echo 'sent to data base';
    }
 
@@ -106,11 +105,6 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
-
-
-    
 
     <style>
         body {
@@ -174,13 +168,12 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 <body>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
-        <a href="index.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-        <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
-        <a href="allusers.php" class="nav-item nav-link  active"  >Users</a>
-        <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Manual Order</a>
-        <a href="checks.php" class="nav-item nav-link " style="color: #fbb448;">Checks</a>
-        <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
-    </nav>
+    <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
+    <a href="allproducts.php" class="nav-item nav-link  "  style="color: #fbb448;">Products</a>
+        <a href="allusers.php" class="nav-item nav-link  "  style="color: #fbb448;">Users</a>
+        <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
+        <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+        </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
@@ -230,10 +223,13 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
                 <div class="col-lg-3  "><label for="name">Ext :</label></div>
                 <div class="col-lg-3"><input type="text" placeholder="enter extention" name="ext"  ></div>
             </div>
-            <div class="row my-3">
-                <div class="col-lg-3  "><label for="name">Profile pic :</label></div>
-                <div class="col-lg-3">    <input class="col-3" type="file" value="browse" name="PicName"></div>
-            </div>
+            <!-- <div class="row my-3">
+                <div class="col-lg-3  "><label for="role">Role</label></div>
+                <div class="col-lg-3">   <select name="role" >
+                <option value="user">USER</option>
+                <option value="admin"> ADMIN</option>
+                </select></div>
+            </div> -->
             <div class="row my-3 text-center ">
                 <input class="col-2" type="submit" name="submit">
             </div>

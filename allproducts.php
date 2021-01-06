@@ -230,7 +230,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                             <h2>All <b>Products</b></h2>
                         </div>
                         <div class="col-sm-7">
-                            <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
+                            <a href="addproduct.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
                         </div>
                     </div>
                 </div>

@@ -179,19 +179,7 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
         </div>
     </table>
     <form>
-
-
-
-
-
-
-
-
-
-
-
-    
-                <table class="table table-striped table-hover">
+             <table class="table table-striped table-hover">
                     <thead class="table-title">
                         <tr>
                             <th style="width: 20%;">Order Date</th>
@@ -205,7 +193,6 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
                     <?php
                     $result = mysqli_query($conn,"SELECT OID  FROM orders");
                        while ($row = $result->fetch_assoc()){
-                         
                          $id =$row['OID'];  
                         $result2 = mysqli_query($conn,"SELECT`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
                         products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
@@ -217,24 +204,26 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
                     ");
                         $row3 = $result2->fetch_assoc();
                       echo
-                       ' 
+                       '
                         <tr class="parent">
-                      <td>'.$row3["OrderDate"].'</td>
-                      <td><span class="btn">+</span></td>
-                      <td>
+                    <td>'.$row3["OrderDate"].'</td>
+                    <td><span class="btn">+</span></td>
+                     <td>'.$row3["Price"].'</td>
+                    <td>
                  <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9; </i>Cancel Order</a>
                             </td>
                       </tr>';
                     // echo"<tr class='parent' id='1'>";
                     echo "<tr class='child-'>";
-                    while ($row2 = $result2->fetch_assoc()){
+                    // while ($row2 = $result2->fetch_assoc()){
                           echo
                        '
-                         <td>'.$row2["PPicPath"].'</td>
-                        <td>'.$row2["Quantity"].'</td>
-                        <td>'.$row2["Price"].'</td>'
-                            ;}}
-                            echo "</tr>";
+                         <td>'.$row3["PPicPath"].'</td>
+                    
+                        <td>'.$row3["Quantity"].'</td>';
+                       
+                        echo "</tr>";
+                            ;}
                            
                         ?>
                     <?php

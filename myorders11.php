@@ -2,12 +2,10 @@
 
 require_once('checkCookies.php'); 
 
-define("DB_SERVER","localhost");
-define("DB_USER","root");
-define("DB_PASS","");
-define("DB_NAME", "cafetria");
-define("DB_PORT","3306");
-$conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
+$dsn="mysql:dbname=cafetria;dbhost=127.0.0.1;dbport=3306";
+Define("DB_USER","root");
+Define("DB_PASS","");
+$db= new PDO($dsn,DB_USER,DB_PASS);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,15 +127,17 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
             width: 130px;
             height: 130px;
         }
-
+        img{
+            width: 130px;
+        }
 
         
     </style>
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-    </script>
+    </script> -->
    
 </head>
 
@@ -163,25 +163,24 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
                 <h4 style="display: inline-block;">From :</h4>
             </td>
             <td>
-                <input type="date" name="from" value="<?php  $_POST['from']; ?>">
+                <input type="date" name="from" >
             </td>
             <td>
                 <h4 style="display: inline-block;">To :</h4>
             </td>
             <td>
-                <input type="date" name="to" value="<?php $_POST['to']; ?>">
+                <input type="date" name="to" >
             </td>
             <td>
-                <input type="submit" name="search"> Search
+                <input type="submit" name="submit"> 
             </td>
         </tr>
                <div>
         </div>
     </table>
     <form>
-
-
-
+            
+    
 
 
 
@@ -196,66 +195,121 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);?>
                         <tr>
                             <th style="width: 20%;">Order Date</th>
                             <th style="width: 15%;"> Status</th>
-                            <th style="width: 15%;">Price</th>
+                            <th style="width: 15%;"> total price</th>
                             <th style="width: 15%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
                     <?php
-                    $result = mysqli_query($conn,"SELECT OID  FROM orders");
-                       while ($row = $result->fetch_assoc()){
+                   if($db){
+
+                    // echo "connected";
+                    $selQry="select OID from orders ";
+                  
+                    $stmt=$db->prepare($selQry);
+                    $res=$stmt->execute();
+                    $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                       foreach($rows as $row){
                          
                          $id =$row['OID'];  
-                        $result2 = mysqli_query($conn,"SELECT`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
-                        products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
-                        from `order-product`, products, Orders,systemuser 
-                        WHERE Orders.OID=`order-product`.OID 
-                        and `order-product`.PID=products.PID 
-                        and Orders.UserId=systemuser.UID
-                        and orders.OID= $id
-                    ");
-                        $row3 = $result2->fetch_assoc();
-                      echo
-                       ' 
-                        <tr class="parent">
-                      <td>'.$row3["OrderDate"].'</td>
-                      <td><span class="btn">+</span></td>
-                      <td>
-                 <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9; </i>Cancel Order</a>
-                            </td>
-                      </tr>';
-                    // echo"<tr class='parent' id='1'>";
-                    echo "<tr class='child-'>";
-                    while ($row2 = $result2->fetch_assoc()){
-                          echo
-                       '
-                         <td>'.$row2["PPicPath"].'</td>
-                        <td>'.$row2["Quantity"].'</td>
-                        <td>'.$row2["Price"].'</td>'
-                            ;}}
-                            echo "</tr>";
-                           
+
+                         ?>
+                         <?php
+                         
+                         if(isset($_POST['submit'])){
+                    //  var_dump(strtotime($_POST['from']));
+                           $from=$_POST['from'];
+                           $to=$_POST['to'];
+                            $userid = $_COOKIE['userID'];
+                            $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
+                            products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                            from `order-product`, products, Orders,systemuser 
+                            WHERE Orders.OID=`order-product`.OID 
+                            and `order-product`.PID=products.PID 
+                            and Orders.UserId=systemuser.UID
+                            and orders.OID= $id
+                            and systemuser.UID= $userid 
+                            and OrderDate between '$from' and '$to'
+                            ";
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                         }else
+                    //    var_dump($id) ;
+                      { 
+                        $userid = $_COOKIE['userID'];
+                          $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
+                       products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                       from `order-product`, products, Orders,systemuser 
+                       WHERE Orders.OID=`order-product`.OID 
+                       and `order-product`.PID=products.PID 
+                       and Orders.UserId=systemuser.UID
+                       and systemuser.UID= $userid 
+                       and orders.OID= $id";}
+                  
+                       $stmt2=$db->prepare($selQry2);
+                       $res2=$stmt2->execute();
+                       $rows2=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+                       if(!count($rows2)==0){
+                       echo"<tr><td>".$rows2[0]['OrderDate']."</td><td>".$rows2[0]['Status']."</td>";
+                       $sum = 0;
+                       foreach($rows2 as $row){
+                       $sum+= ($row['Price']*$row['Quantity']);
+                            }
+                    echo "<td>".$sum."</td>";
+                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9; </i>Cancel Order</a>
+                       </td></tr><tr>";
+
+                          foreach($rows2 as $row){
+                            // echo $row['OID'];
+                            echo "<td class='text-center'>";
+                            $img = $row["PPicPath"];
+                            echo '<img src="images/'.$img.'" ><br>'.$row["Quantity"].'
+                            <br>'.$row["Pname"].'<br>'.$row["Price"]."LE <br>".$row["Price"]*$row["Quantity"]
+                            ;
+                            
+                            
+                            echo"</td>
+                            ";
+
+
+
+
+
+
+
+
+                          }
+                          echo "</tr>";
+               
+                }}}
                         ?>
-                    <?php
-                    //   echo"<tr class='child-'>";
-                    //   echo"<td style='width:15%; display:inline-block'>" ."<img style='width:50px;' src='".$row2['PPicPath']. "'> <br>" .$row2['Quantity']."</td>";  
-                    //   echo"</tr>";}
-                    ?>
+                   
                     </tbody>
-                </table>     
-                <script>
+                </table> 
+                
+                
+                <!-- <script>
         // view and hide
         $(function () {
             $('.parent')
                 .on("click", function () {
                     $(this).next().toggle();
+                    return false;
                     // var idOfParent = $(this).parents('tr').attr('id');
                  // $('tr.child-' + idOfParent).toggle('fast');
                 });
             $('.child-').hide().children('td');
         });
-    </script> 
+    </script>  -->
+    
+
 </body>
 <script>
 $(".logout").click(function () {

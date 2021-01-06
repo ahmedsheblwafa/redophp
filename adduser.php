@@ -38,7 +38,7 @@ if (isset($_POST['submit'])){
     $spacesPassword = "/^$|\s+/";
     $symbolPassword = "/(?=.*?[#?!@$%^&*-])/";
     $minEightPassword = "/.{3,}/";
-}
+
 if(empty($name)){
     $nameErr="Name is Required"; 
  }
@@ -84,11 +84,12 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 
    echo '<script>alert("New Record is added successfully")</script>'; 
    
+   if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext')")){
+   //                 echo 'sent to data base';
+   }
 
 }
   
-if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext')")){
-//                 echo 'sent to data base';
 }
 
 ?>
@@ -254,12 +255,3 @@ if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext
             });
         })
         </script>
-
-    
-
-
-    
-    
-    
-    
-   

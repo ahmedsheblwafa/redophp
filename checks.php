@@ -11,12 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
-
-
-    
-
     <style>
         body {
             /* min-height: 100vh; */
@@ -82,9 +76,6 @@
             $('.col-5').hide();
             $('tr.parent')
                 .on("click", function () {
-                    
-                   
-                    
                      $(this).parent().parent().next().next().next().next().next().toggle();
                     // console.log(idOfParent);
                     // $('tr.child-' + idOfParent).toggle('fast');
@@ -94,18 +85,6 @@
             
         });
 
-    
-
-        // add and minus
-        // $(function () {
-        //     $('tr.parent td span.btn')
-        //         .on("click", function () {
-        //             var idOfParent = $(this).parents('tr').attr('id');
-        //             $('tr.child-' + idOfParent).toggle('fast');
-        //         });
-        //     $('tr[class^=child-]').hide().children('td');
-        // });
-
     </script>
 
 </head>
@@ -114,7 +93,7 @@
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
     <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-    <a href="Viewproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
+    <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link active"style="color: #fbb448;" >Checks</a>
@@ -173,9 +152,7 @@ if($db){
        echo "<option value=".$row['Name'].">".$row['Name']."</option>";
       }
 
-                   
-                
-      
+
   echo"</select></td><td>
   <button type='submit' name='submit'>submit</button></td></tr></table></form>";
 }
@@ -327,17 +304,8 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     
                     
                     ";}
-                                
-                        
-                        
-
-}
-
-
  
-
-
-    
+}
 
     }
 }

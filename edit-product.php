@@ -1,6 +1,50 @@
+<?php 
+require_once('checkCookies.php');
+define("DB_SERVER","localhost");
+define("DB_USER","root");
+define("DB_PASS","");
+define("DB_NAME", "cafetria");
+define("DB_PORT","3306");
+$conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
+$id=$_GET['id'] ?? "1";
+$sql="SELECT * FROM products ";
+$sql .= "WHERE PID='". $id."';";
+$result=mysqli_query($conn,$sql);
+
+function is_post_request() {
+    return $_SERVER['REQUEST_METHOD'] == 'POST';
+  }
+    if(is_post_request()){
+    $product=[];
+    $product['Pname']=$_POST['Pname'];
+    $product['PID']=$_POST['PID'];
+    $product['Price']=$_POST['Price'];
+    $product['PPicPath']=$_POST['PPicPath'];
+    $sql = "UPDATE products SET ";
+    $sql .= "Pname='" . $product['Pname'] . "', ";
+    $sql .= "Price='" . $product['Price'] . "', ";
+    $sql .= "PPicPath='" . $product['PPicPath'] . "' ";
+    $sql .= "WHERE PID='" . $product['PID'] . "' ";
+    $result= mysqli_query($conn, $sql);
+     $output=mysqli_fetch_array($result);
+            
+    // For UPDATE statements, $result is true/false
+    if($output) {
+    header("location:allproducts.php");
+    } else {
+      // UPDATE failed
+      echo mysqli_error($conn);
+      exit;
+    }
+}else{
+        $sql="SELECT * FROM products ";
+        $sql .= "WHERE PID='". $id."';";
+        $result=mysqli_query($conn,$sql);
+        $product=mysqli_fetch_array($result);            
+}
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Add Product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
@@ -11,12 +55,6 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
-
-
-    
-
     <style>
         body {
             /* min-height: 100vh; */
@@ -64,10 +102,10 @@
             height: 130px;
         }
 
+
         table {
             width: 100%;
         }
-
         .progress {
             height: 10px;
         }
@@ -96,22 +134,22 @@
     
     <div class="container-fluid d-inlie-block " >
 
-    <form action="" name="form" method="POST" style="margin-left:37%;">
+    <form action="<?php echo'edit-product.php?PID='.$id ?>"method="POST" style="margin-left:37%;">
         
             <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Product Name :</label></div>
-                <div class="col-lg-3"><input type="text"  name="name" value="" >
+                <div class="col-lg-3"><input type="text"  name="name" value="<?php echo $product['Pname']; ?>" >
             </div>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Price :</label></div>
-                <div class="col-lg-3"><input type="number"  name="price" min="0" stept="0.5" ></div>
+                <div class="col-lg-3"><input type="number"  name="price" min="0" stept="0.5" value="<?php echo $product['Price']; ?>" ></div>
             </div>
           
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Product Picture :</label></div>
                 <div class="col-lg-3  "><input type="image"></div>
-                <div class="col-lg-3">    <input class="col-3" type="file" value="browse" name="image"></div>
+                <div class="col-lg-3">    <input class="col-3" type="file" value="<?php echo $product['PPicPath']; ?>" name="image"></div>
             </div>
             <div class="row my-3 text-center ">
                 <input class="col-2" type="submit" name="submit">

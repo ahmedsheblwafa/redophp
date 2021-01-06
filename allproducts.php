@@ -252,7 +252,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                        echo "<td>";?>
                       <a class="action" href="<?php echo 'showproduct.php?id='.$row['PID']; ?>">          
                       <i class="fas fa-eye"></i>
-                    <a class="action" href="<?php echo 'editproduct.php?id='.$row['PID']; ?>">   
+                    <a class="action" href="<?php echo 'edproduct.php?id='.$row['PID']; ?>">   
                       <i class='fa fa-pencil' style='color:#fbb448;'></i></a>
                       <a class="action" href="<?php echo 'delete.php?id='.$row['PID']; ?>">          
                         <i class='material-icons' style='color:red;'>&#xE5C9</i></a>
@@ -261,8 +261,6 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                     </tbody>
                 </table> 
 </body>
-
-
 <script>
     $(".logout").click(function () {
             $.post('checkCookies.php',{

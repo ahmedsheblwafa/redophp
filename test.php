@@ -10,7 +10,7 @@ $productid = $_POST['productid'];
 $productQuantity = $_POST['quantity'];
 
 $userid=$_COOKIE['userID'];
-$selectquery = "INSERT INTO orders (OrderDate, Status, UserId) VALUES (now(),'pending',$userid)" ;
+// $selectquery = "INSERT INTO orders (OrderDate, Status, UserId) VALUES (now(),'pending',$userid)" ;
 $statement = $db->prepare($selectquery);
 $statement->execute();
 

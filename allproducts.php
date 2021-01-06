@@ -26,6 +26,9 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
 <style>
 
         .table-responsive {
@@ -212,13 +215,15 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
         });
     </script>
 </head>
-<body>
+<body style='font-family: "Kaushan Script", cursive !important'>
 <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
     <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
-    <a href="allproducts.php" class="nav-item nav-link  active"  style="color: #fbb448;">Products</a>
+    <a href="allproducts.php" class="nav-item nav-link active "  style="color: #fbb448;">Products</a>
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
     </nav>
     <div class="container-xl">
         <div class="table-responsive">
@@ -229,7 +234,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                             <h2>All <b>Products</b></h2>
                         </div>
                         <div class="col-sm-7">
-                            <a href="addproduct.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
+                            <a href="add-product.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
                         </div>
                     </div>
                 </div>

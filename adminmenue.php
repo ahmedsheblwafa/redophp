@@ -39,7 +39,7 @@ $prouct->connectdb();
 
 </head>
 
-<body>
+<body style='font-family: "Kaushan Script", cursive !important'>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
     <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
@@ -47,6 +47,8 @@ $prouct->connectdb();
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link active "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+                <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -274,7 +276,8 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img style="width:100px; height:100px" src="images/'.$productrow['PPicPath'].'"
+                                                            <img 
+                                                             src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Price'].'</button>

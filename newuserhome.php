@@ -41,12 +41,12 @@ $prouct->connectdb();
 
 </head>
 
-<body>
+<body style='font-family: "Kaushan Script", cursive !important'>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="#" class="nav-item nav-link active">Home</a>
         <a href="myorders11.php" class="nav-item nav-link" style="color: #fbb448;">My Orders</a>
-        <button type="button" class="logout"><a href="login.php" class="nav-item nav-link ">LogOut</a></button>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:83%" >Logout</a>
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -81,7 +81,7 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img src="images/'.$productrow['PPicPath'].'"
+                                                            <img style="width:100px; height:100px"  src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Quantity'].'</button>
@@ -140,7 +140,7 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img src="images/'.$productrow['PPicPath'].'"
+                                                            <img style="width:100px; height:100px"  src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Price'].'</button>
@@ -184,7 +184,7 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img src="images/'.$productrow['PPicPath'].'"
+                                                            <img style="width:100px; height:100px"  src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Price'].'</button>
@@ -226,7 +226,7 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img src="images/'.$productrow['PPicPath'].'"
+                                                            <img style="width:100px; height:100px"  src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Price'].'</button>
@@ -272,7 +272,7 @@ $prouct->connectdb();
                                                     
                                                     <div class="card rounded shadow-sm border-0">
                                                         <div class="card-body p-2">
-                                                            <img src="images/'.$productrow['PPicPath'].'"
+                                                            <img style="width:100px; height:100px"  src="images/'.$productrow['PPicPath'].'"
                                                                 alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
                                                             <div class="carousel-caption p-3">
                                                                 <button class="price" value="5" disabled>'.$productrow['Price'].'</button>

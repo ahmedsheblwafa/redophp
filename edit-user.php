@@ -22,6 +22,7 @@ if(isset($_POST['submit'])){
     $stmt2=$db->prepare($sql);
     $res2=$stmt2->execute();
     // header('location:allproducts.php');
+    echo '<script>alert("Your Edit is Submitted")</script>'; 
 
 }
    
@@ -101,20 +102,22 @@ if(isset($_POST['submit'])){
 
 </head>
 
-<body>
+<body  style='font-family: "Kaushan Script", cursive !important'>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="index.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-        <a href="allproducts.php" class="nav-item nav-link  "  >Products</a>
+        <a href="allproducts.php" class="nav-item nav-link"  style="color: #fbb448;"   >Products</a>
         <a href="allusers.php" class="nav-item nav-link "style="color: #fbb448;"  >Users</a>
         <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link " style="color: #fbb448;">Checks</a>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
-            <img src=logo_size.jpg> Edit Product <img src=logo_size.jpg>
+            <img src=logo_size.jpg> Edit User <img src=logo_size.jpg>
         </h1>
     </div>
 
@@ -148,6 +151,15 @@ if(isset($_POST['submit'])){
     <script src="js/shebl.js.js"></script>
 </body>
 </html>
+<script>
+     $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
      
     
    

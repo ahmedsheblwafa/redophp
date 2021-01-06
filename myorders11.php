@@ -20,6 +20,9 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
     <style>
         
         body{
@@ -141,12 +144,12 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
    
 </head>
 
-<body>
+<body style='font-family: "Kaushan Script", cursive !important'>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="newuserhome.php" class="nav-item nav-link " style="color: #fbb448;">Home</a>
         <a href="#" class="nav-item nav-link active">My Orders</a>
-        <button type="button" class="logout"><a href="#" class="nav-item nav-link ">LogOut</a></button>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:80%" >Logout</a>
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">

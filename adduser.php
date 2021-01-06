@@ -9,7 +9,6 @@ if($_COOKIE['userRole'] == 'user'){
 
 <?php
 
-// require_once('checkCookies.php');
 
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
@@ -165,7 +164,7 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 
 </head>
 
-<body>
+<body style='font-family: "Kaushan Script", cursive !important'>
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
     <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
@@ -173,6 +172,8 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
         <a href="allusers.php" class="nav-item nav-link  "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
         </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
@@ -183,7 +184,6 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
 
     
     <div class="container-fluid d-inlie-block " >
-    <p class="text-success text-center"><?php echo $valid; ?></p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="form" method="POST" style="margin-left:37%;">
         
             <div class="row my-3">

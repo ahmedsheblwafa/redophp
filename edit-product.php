@@ -177,7 +177,7 @@ if(isset($_POST['submit2'])){
 
     $stmt2=$db->prepare($sql);
     $res2=$stmt2->execute();
-    header('location:allproducts.php');
+    // header('location:allproducts.php');
 
 }
    

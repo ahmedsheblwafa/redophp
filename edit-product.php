@@ -1,6 +1,18 @@
+<?php 
+require_once('checkCookies.php');
+$dsn="mysql:dbname=cafetria;dbhost=127.0.0.1;dbport=3306";
+Define("DB_USER","root");
+Define("DB_PASS","");
+$db= new PDO($dsn,DB_USER,DB_PASS);
+$id=$_GET['id'] ?? "1";
+$sql3="SELECT * FROM products ";
+$sql3 .= "WHERE PID='". $id."';";
+$stmt3=$db->prepare($sql3);
+$res3=$stmt3->execute();
+$row3=$stmt3->fetch(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Add Product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
@@ -11,12 +23,6 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
-
-
-    
-
     <style>
         body {
             /* min-height: 100vh; */
@@ -64,10 +70,10 @@
             height: 130px;
         }
 
+
         table {
             width: 100%;
         }
-
         .progress {
             height: 10px;
         }
@@ -80,7 +86,7 @@
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="index.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-        <a href="allproducts.php" class="nav-item nav-link  active"  >Products</a>
+        <a href="allproducts.php" class="nav-item nav-link  "  >Products</a>
         <a href="allusers.php" class="nav-item nav-link "style="color: #fbb448;"  >Users</a>
         <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link " style="color: #fbb448;">Checks</a>
@@ -96,25 +102,24 @@
     
     <div class="container-fluid d-inlie-block " >
 
-    <form action="" name="form" method="POST" style="margin-left:37%;">
+    <form action="" method="POST" style="margin-left:37%;">
         
             <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Product Name :</label></div>
-                <div class="col-lg-3"><input type="text"  name="name" value="" >
+                <div class="col-lg-3"><input type="text"  name="name2" value="<?php echo $row3['Pname']; ?>" >
             </div>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Price :</label></div>
-                <div class="col-lg-3"><input type="number"  name="price" min="0" stept="0.5" ></div>
+                <div class="col-lg-3"><input type="number"  name="price2" min="0" stept="0.5" value="<?php echo $row3['Price']; ?>" ></div>
             </div>
           
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Product Picture :</label></div>
-                <div class="col-lg-3  "><input type="image"></div>
-                <div class="col-lg-3">    <input class="col-3" type="file" value="browse" name="image"></div>
+                <div class="col-lg-3">  <input class="col-3" type="file" value="<?php echo $row3['PPicPath']; ?>" name="image2"></div>
             </div>
             <div class="row my-3 text-center ">
-                <input class="col-2" type="submit" name="submit">
+                <input class="col-2" type="submit" name="submit2">
             </div>
         
     </form>
@@ -125,45 +130,28 @@
     <script src="js/shebl.js.js"></script>
 </body>
 </html>
-  <!-- <?php
-// include "connection.php";   
+   <?php
+//    $id=$_GET['id'] ?? "1";
+//    $sql="SELECT * FROM products ";
+//    $sql .= "WHERE PID='". $id."';";
+//    $result=mysqli_query($conn,$sql);
 
-// $sql = mysqli_query($conn ,"select Pname, Price, Category,PPicPath FROM products") ;
-// $name = $_POST['name'];
-// $price = $_POST['price'];
-// $cat = $_POST['cat'];
-// $image = $_POST['image'];
+if(isset($_POST['submit2'])){
+    $id=$_GET['id'];
+    echo $id;
+    $sql = "UPDATE products SET ";
+    $sql .= "Pname='" . $_POST['name2'] . "', ";
+    $sql .= "Price='" . $_POST['price2'] . "', ";
+    $sql .= "PPicPath='" . $_POST['image2'] . "' ";
+    $sql .= "WHERE PID='" . $_GET['id'] . "' ";
 
+    $stmt2=$db->prepare($sql);
+    $res2=$stmt2->execute();
+    // header('location:allproducts.php');
 
-// if (isset($_POST['submit'])) {
-//     // checking name
-//     ;
-// }
-    if(empty($_POST['name'])){
-    echo "Please Enter product name";
-    return false;
-    }if(empty($_POST['price'])){
-    echo "Please Enter product price";
-    return false;
-    }if(empty($_POST['cat'])){
-    echo "Please choose product category";
-    return false;
-    }if(empty($_POST['image'])){
-    echo "Please add product image";
-    return false;
+}
    
-    // }if (!$name_matches[0]){
-    //     $name_subject = $_POST['name'];
-    // $name_pattern = '/^[a-zA-Z ]*$/';
-    // $pattern=preg_match($name_pattern, $name_subject, $name_matches);
-    // echo "You must supply your name";
-    // return false;
-    }else{
-        echo"Form is recorded";
-        $result = mysqli_query($conn ,"insert into products (Pname, Price, Category,PPicPath) VALUES ('$name' , '$price','$cat' ,'$image')");
-
-    }
-?> -->
+?> 
 
     
     

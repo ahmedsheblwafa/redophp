@@ -257,9 +257,15 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                        $sum+= ($row['Price']*$row['Quantity']);
                             }
                     echo "<td>".$sum."</td>";
-                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'> deliver</a>
-                       </td></tr><tr>";
-
+                    echo"<td>
+                    <form method='POST' action=''>
+                         <input name='OID' type='hidden' value='".$row['OID']."'>";
+                            if($row['Status']=="deliverd"){
+                       echo" <input name='submit2' type='submit' disabled value='delivered' class='btn btn-secondary'>"; }
+                            else{echo" <input name='submit2' type='submit'  value='pending'class='btn btn-success'>"; }
+                    
+                    echo "</form>
+                    </td></tr><tr>";
                           foreach($rows2 as $row){
                             // echo $row['OID'];
                             echo "<td class='text-center'>";
@@ -267,22 +273,21 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                             echo '<img src="images/'.$img.'" ><br>'.$row["Quantity"].'
                             <br>'.$row["Pname"].'<br>'.$row["Price"]."LE <br>".$row["Price"]*$row["Quantity"]
                             ;
-                            
-                            
                             echo"</td>
                             ";
-
-
-
-
-
-
-
 
                           }
                           echo "</tr>";
                
                 }}}
+                if(isset($_POST['submit2'])){
+                    $deliver=$_POST['OID'];
+                    $selQry2="  UPDATE orders SET Status='deliverd' WHERE OID=$deliver";
+               
+                    $stmt2=$db->prepare($selQry2);
+                    $res2=$stmt2->execute();
+              
+                }
                         ?>
                    
                     </tbody>

@@ -252,11 +252,17 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
                     echo "<td>".$sum."</td>";
                        echo"<td>
                        <form method='POST' action=''>
-                            <input name='OID' type='hidden' value='".$row['OID']."'>
-                            <input name='submit2' type='submit'  value='Delete'class='btn btn-danger'> 
+                            <input name='OID' type='hidden' value='".$row['OID']."'>";
+                            if($rows2[0]['Status']=='deliverd'){
+                                
+                             echo "<input name='submit2' type='submit'  disabled value='delivered'class='btn btn-danger'>";
+                            }else{
+                                echo "<input name='submit2' type='submit' value='delete'class='btn btn-danger'>";
+  
+                            }
 
                        
-                       </form>
+                      echo"</form>
                        </td></tr><tr>";
 
                           foreach($rows2 as $row){

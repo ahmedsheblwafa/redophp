@@ -43,7 +43,7 @@ $prouct->connectdb();
     <!-- nav -->
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
     <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-    <a href="Viewproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
+    <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link active "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>

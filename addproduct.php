@@ -21,16 +21,16 @@ $conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
 $valid=$nameErr=$priceErr=$catErr='';
 $set_name=$set_email='';   
 
-$name = $_POST['name'];
-$price =  $_POST['price'];
-$cat = $_POST['cat'];
-$img = $_POST['img'];
-
-$validName="/^[a-zA-Z ]*$/";
- extract($_POST);
 
 if (isset($_POST['submit'])){
     // $validEmail="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+    extract($_POST);
+    
+    $name = $_POST['name'];
+    $price =  $_POST['price'];
+    $cat = $_POST['cat'];
+    $img = $_POST['img'];
+    $validName="/^[a-zA-Z ]*$/";
     // $uppercasePassword = "/(?=.*?[A-Z])/";
     // $lowercasePassword = "/(?=.*?[a-z])/";
     // $digitPassword = "/(?=.*?[0-9])/";
@@ -163,12 +163,11 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
 </head>
 <body>
 <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
-        <a href="index.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
-        <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
-        <a href="allusers.php" class="nav-item nav-link  "  >Users</a>
-        <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Manual Order</a>
-        <a href="checks.php" class="nav-item nav-link " style="color: #fbb448;">Checks</a>
-        <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
+    <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
+    <a href="allproducts.php" class="nav-item nav-link  "  style="color: #fbb448;">Products</a>
+        <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
+        <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
+        <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>

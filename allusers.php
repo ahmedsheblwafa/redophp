@@ -25,8 +25,13 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
-<style>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
+    <style>
+        body{
+            font-family: "Kaushan Script", cursive !important;
+        }
         .table-responsive {
             margin: 30px 0;
         }
@@ -89,14 +94,7 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
             padding: 12px 15px;
             vertical-align: middle;
         }
-/* 
-        table.table tr th:first-child {
-            width: fit-content;
-        }
 
-        table.table tr th:last-child {
-            width: 100px;
-        } */
 
         table.table-striped tbody tr:nth-of-type(odd) {
             background-color: #fcfcfc;
@@ -159,45 +157,8 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
             color: #666;
         }
 
-        .pagination {
-            float: right;
-            margin: 0 0 5px;
-        }
+       
 
-        .pagination li a {
-            border: none;
-            font-size: 13px;
-            min-width: 30px;
-            min-height: 30px;
-            color: #999;
-            margin: 0 2px;
-            line-height: 30px;
-            border-radius: 2px !important;
-            text-align: center;
-            padding: 0 6px;
-        }
-
-        .pagination li a:hover {
-            color: #666;
-        }
-
-        .pagination li.active a,
-        .pagination li.active a.page-link {
-            background: #fbb448;
-        }
-
-        .pagination li.active a:hover {
-            background: #0397d6;
-        }
-
-        .pagination li.disabled i {
-            color: #ccc;
-        }
-
-        .pagination li i {
-            font-size: 16px;
-            padding-top: 6px
-        }
 
         .hint-text {
             float: left;
@@ -211,13 +172,15 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
         });
     </script>
 </head>
-<body>
-<nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
+<body style='font-family: "Kaushan Script", cursive !important'>
+<nav class="nav nav-tabs" style='background-color: rgba(42, 41, 41, 0.762);width: 100%;font-family: "Kaushan Script", cursive !important'>
     <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
     <a href="allproducts.php" class="nav-item nav-link  "  style="color: #fbb448;">Products</a>
         <a href="allusers.php" class="nav-item nav-link active "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
         </nav>
     <div class="container-xl">
         <div class="table-responsive">
@@ -225,7 +188,7 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h2>All <b>users</b></h2>
+                            <h2>All <b>Users</b></h2>
                         </div>
                         <div class="col-sm-7">
                             <a href="adduser.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add user</span></a>

@@ -1,3 +1,12 @@
+<?php
+
+require_once('checkCookies.php');
+
+if($_COOKIE['userRole'] == 'user'){
+    header('Location: ./adminmenue.php');
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -97,7 +106,7 @@
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link active"style="color: #fbb448;" >Checks</a>
-        <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
+        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
@@ -311,4 +320,14 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
  ?>
+
+<script>
+    $(".logout").click(function () {
+            $.post('checkCookies.php',{
+                cook: 'delete'
+            },function(){
+               window.location.replace("login.php");
+            });
+        })
+        </script>
 

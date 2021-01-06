@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Add Product</title>
+    <title>Edit User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

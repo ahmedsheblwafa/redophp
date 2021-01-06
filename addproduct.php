@@ -165,7 +165,7 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
 <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="index.php" class="nav-item nav-link "  style="color: #fbb448;">Home</a>
         <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
-        <a href="allusers.php" class="nav-item nav-link  active"  >Users</a>
+        <a href="allusers.php" class="nav-item nav-link  "  >Users</a>
         <a href="AdminOrders.php" class="nav-item nav-link "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link " style="color: #fbb448;">Checks</a>
         <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->

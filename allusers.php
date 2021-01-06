@@ -250,7 +250,7 @@ $result = mysqli_query($conn,"SELECT UID, Name ,RoomNo,Ext FROM systemuser");
                        echo "<td>";?>
                     <a class="action" href="<?php echo 'edit-user.php?id='.$row['UID'];?>">   
                       <i class='fa fa-pencil' style='color:#fbb448;'></i></a>
-                      <a class="action" href="<?php echo 'delete.php?id='.$row['UID'];?>">          
+                      <a class="action" href="<?php echo 'deleteuser.php?id='.$row['UID'];?>">          
                         <i class='material-icons' style='color:red;'>&#xE5C9</i></a>
                     </td>
                      <?php echo"</tr>";}?>

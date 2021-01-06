@@ -10,36 +10,6 @@ $sql3 .= "WHERE PID='". $id."';";
 $stmt3=$db->prepare($sql3);
 $res3=$stmt3->execute();
 $row3=$stmt3->fetch(PDO::FETCH_ASSOC);
-
-// var_dump($row3);
-
-   
-    // $product=[];
-    // $product['Pname']=$_POST['Pname'];
-    // $product['PID']=$_POST['PID'];
-    // $product['Price']=$_POST['Price'];
-    // $product['PPicPath']=$_POST['PPicPath'];
-    // $sql = "UPDATE products SET ";
-    // $sql .= "Pname='" . $product['Pname'] . "', ";
-    // $sql .= "Price='" . $product['Price'] . "', ";
-    // $sql .= "PPicPath='" . $product['PPicPath'] . "' ";
-    // $sql .= "WHERE PID='" . $product['PID'] . "' ";
-    // $result= mysqli_query($conn, $sql);
-    //  $output=mysqli_fetch_array($result);
-    // For UPDATE statements, $result is true/false
-    // if($output) {
-    // header("location:allproducts.php");
-    // } else {
-    //   // UPDATE failed
-    //   echo mysqli_error($conn);
-    //   exit;
-    // }
-// else{
-//         $sql="SELECT * FROM products ";
-//         $sql .= "WHERE PID='". $id."';";
-//         $result=mysqli_query($conn,$sql);
-//         $product=mysqli_fetch_array($result);            
-// }
 ?>
 <!DOCTYPE html>
 <html>

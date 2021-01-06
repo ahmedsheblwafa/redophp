@@ -85,6 +85,7 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
    echo '<script>alert("New Record is added successfully")</script>'; 
    if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext,Role) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext','user')")){
    //                 echo 'sent to data base';
+//    reset();
    }
 
 }
@@ -185,7 +186,6 @@ if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
     <div class="container-fluid d-inlie-block " >
     <p class="text-success text-center"><?php echo $valid; ?></p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="form" method="POST" style="margin-left:37%;">
-        
             <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Name :</label></div>
                 <div class="col-lg-3"><input type="text" placeholder="enter you name" name="name" value="<?php echo $set_name;?>" >

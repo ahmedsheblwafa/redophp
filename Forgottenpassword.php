@@ -1,5 +1,5 @@
 <?php
-require_once('checkCookies.php');
+// require_once('checkCookies.php');
 ?>
 
 <!DOCTYPE html>
@@ -156,7 +156,7 @@ $(".logout").click(function () {
 //  }
 //  echo "Connected successfully";
 
-session_start();
+// session_start();
 $dsn="mysql:dbname=cafetria;dbhost=127.0.0.1;dbport=3306";
 
 Define("DB_USER","root");

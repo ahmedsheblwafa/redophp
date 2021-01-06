@@ -222,7 +222,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
-        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+        <a href="login.php" class="nav-item nav-link logout"style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
 
     </nav>
     <div class="container-xl">
@@ -234,7 +234,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                             <h2>All <b>Products</b></h2>
                         </div>
                         <div class="col-sm-7">
-                            <a href="add-product.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
+                            <a href="addproduct.php" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add Product</span></a>
                         </div>
                     </div>
                 </div>

@@ -152,7 +152,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
-        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+        <a href="login.php" class="nav-item nav-link logout"style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">

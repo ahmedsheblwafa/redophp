@@ -5,8 +5,91 @@ require_once('checkCookies.php');
 if($_COOKIE['userRole'] == 'user'){
     header('Location: ./adminmenue.php');
 }
+?>
 
+<?php
 
+// require_once('checkCookies.php');
+
+define("DB_SERVER", "localhost");
+define("DB_USER", "root");
+define("DB_PASS", "");
+define("DB_NAME", "cafetria");
+define("DB_PORT","3306");
+
+$conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
+$valid=$nameErr=$emailErr=$passErr=$cpassErr='';
+$set_name=$set_email='';   
+
+ extract($_POST);
+
+if (isset($_POST['submit'])){
+    $name = $_POST['name'];
+    $email =  $_POST['email'];
+    $password = $_POST['password'];
+    $repass = $_POST['repassword'];
+    $Ext = $_POST['ext'];
+
+    $validName="/^[a-zA-Z ]*$/";
+    $validEmail="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+    $uppercasePassword = "/(?=.*?[A-Z])/";
+    $lowercasePassword = "/(?=.*?[a-z])/";
+    $digitPassword = "/(?=.*?[0-9])/";
+    $spacesPassword = "/^$|\s+/";
+    $symbolPassword = "/(?=.*?[#?!@$%^&*-])/";
+    $minEightPassword = "/.{3,}/";
+}
+if(empty($name)){
+    $nameErr="Name is Required"; 
+ }
+ else if (!preg_match($validName,$name)) {
+    $nameErr="Digits are not allowed";
+ }else{
+    $nameErr=true;
+ }
+
+ //Email Address Validation
+if(empty($email)){
+    $emailErr="Email is Required"; 
+  }
+  else if (!preg_match($validEmail,$email)) {
+    $emailErr="Invalid Email Address";
+  }
+  else{
+    $emailErr=true;
+  }
+
+  if(empty($password)){
+    $passErr="Password is Required"; 
+  } 
+  elseif (!preg_match($digitPassword,$password) || !preg_match($minEightPassword,$password)) {
+    $passErr="Password must be  digit and minimum 3 length";
+  }
+  else{
+     $passErr=true;
+  }
+
+ // form validation for confirm password
+if($repass!=$password){
+   $cpassErr="Confirm Password doest Matched";
+}
+else{
+   $cpassErr=true;
+}
+// check all fields are valid or not
+if($nameErr==1 && $emailErr==1 && $passErr==1 && $cpassErr==1)
+{
+   $valid="All fields are validated successfully";
+   $insertquery = "INSERT INTO systemuser(Name, Email, Password) VALUES ('$name','$email','$password')";
+
+   echo '<script>alert("New Record is added successfully")</script>'; 
+   
+
+}
+  
+if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext) VALUES ('$name' , '$email','$password' ,'$RoomNo','$Ext')")){
+//                 echo 'sent to data base';
+}
 
 ?>
 <!DOCTYPE html>
@@ -106,26 +189,37 @@ if($_COOKIE['userRole'] == 'user'){
 
     
     <div class="container-fluid d-inlie-block " >
-
-    <form action="" name="form" method="POST" style="margin-left:37%;">
+    <p class="text-success text-center"><?php echo $valid; ?></p>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="form" method="POST" style="margin-left:37%;">
         
             <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Name :</label></div>
-                <div class="col-lg-3"><input type="text" placeholder="enter you name" name="name" value="<?php echo $_POST['name']; ?>" >
-             
+                <div class="col-lg-3"><input type="text" placeholder="enter you name" name="name" value="<?php echo $set_name;?>" >
+                <p class="err-msg">
+           <?php if($nameErr!=1){ echo $nameErr; }?>
+           </p>
             </div>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Email :</label></div>
-                <div class="col-lg-3"><input type="email" placeholder="enter you e-mail" name="email" value="<?php echo $_POST['email']; ?>"  ></div>
+                <div class="col-lg-3"><input type="email" placeholder="enter you e-mail" name="email"   value="<?php echo $set_email;?>" ></div>
+                <p class="err-msg">
+           <?php if($emailErr!=1){ echo $emailErr; }?>
+           </p>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Password :</label></div>
-                <div class="col-lg-3"><input type="password" placeholder="enter you password" name="Password" value="<?php echo $_POST['password']; ?>"  ></div>
+                <div class="col-lg-3"><input type="password" placeholder="enter you password" name="password"  ></div>
+                <p class="err-msg">
+           <?php if($passErr!=1){ echo $passErr; }?>
+           </p>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Confirm Password :</label></div>
                 <div class="col-lg-3"><input type="password" placeholder="confirm your password" name="repassword"  ></div>
+                <p class="err-msg">
+           <?php if($cpassErr!=1){ echo $cpassErr; }?>
+           </p>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Room No. :</label></div>
@@ -133,7 +227,7 @@ if($_COOKIE['userRole'] == 'user'){
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Ext :</label></div>
-                <div class="col-lg-3"><input type="text" placeholder="enter extention" name="Ext"  ></div>
+                <div class="col-lg-3"><input type="text" placeholder="enter extention" name="ext"  ></div>
             </div>
             <div class="row my-3">
                 <div class="col-lg-3  "><label for="name">Profile pic :</label></div>
@@ -151,67 +245,6 @@ if($_COOKIE['userRole'] == 'user'){
     <script src="js/shebl.js.js"></script>
 </body>
 </html>
- 
-    
-<?php
-include "connection.php";   
-
-// $sql = mysqli_query($conn ,"select Name, Email, Password,RoomNo,Ext FROM systemuser") ;
-
-
-if (isset($_POST['submit'])) {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $repass = mysqli_real_escape_string($conn, $_POST['repassword']);
-    $RoomNo = mysqli_real_escape_string($conn, $_POST['RoomNo']);
-    $Ext = mysqli_real_escape_string($conn, $_POST['ext']);
-    $pass = Password_hash($password, PASSWORD_BCRYPT);
-    $repass = Password_hash($repass, PASSWORD_BCRYPT);
-
-    $emailquery = "select * from systemuser where email ='$email'";
-    $query = mysqli_num_rows($conn,$emailquery);
-    $emailcount = mysqli_num_rows($query);
-    if($emailcount>0){
-        echo "email already exists";
-    }else{
-        if($password === $repass){
-            $insertquery = "insert into systemuser(Name, Email, Password,RoomNo, Ext) VALUES ('$name','$email','$password','$RoomNo','$Ext')";
-        }
-    }
-    ;
-
-// }
-//     if(empty($_POST['name'])){
-//     echo "Please Enter your name";
-//     return false;
-//     }if(empty($_POST['email'])){
-//     echo "Please Enter your Email";
-//     return false;
-//     }if(empty($_POST['password'])){
-//     echo "Please Enter your password";
-//     return false;
-//     }if(empty($_POST['RoomNo'])){
-//     echo "Please Enter your Room no";
-//     return false;
-//     }if(empty($_POST['ext'])){
-//     echo "Please Enter your Room no";
-//     return false;
-//     // }if (!$name_matches[0]){
-//     //     $name_subject = $_POST['name'];
-//     // $name_pattern = '/^[a-zA-Z ]*$/';
-//     // $pattern=preg_match($name_pattern, $name_subject, $name_matches);
-//     // echo "You must supply your name";
-//     // return false;
-//     }else{
-//         echo"Form is recorded";
-//         if(mysqli_query($conn ,"insert into systemuser (Name, Email, Password,RoomNo,Ext) VALUES ('$name' , '$email','$pass' ,'$RoomNo','$Ext')")){
-//             echo 'sent to data base';
-//         };
-
-    }
- ?>
-
 <script>
     $(".logout").click(function () {
             $.post('checkCookies.php',{
@@ -221,6 +254,9 @@ if (isset($_POST['submit'])) {
             });
         })
         </script>
+
+    
+
 
     
     

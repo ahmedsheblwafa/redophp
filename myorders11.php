@@ -24,7 +24,6 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
     <style>
-        
         body{
             font-family: "Kaushan Script", cursive !important;
         }

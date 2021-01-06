@@ -24,12 +24,8 @@ if(isset($_POST['submit'])){
     // header('location:allproducts.php');
     echo '<script>alert("Your Edit is Submitted")</script>'; 
 
-}
-   
+} 
 ?> 
-
-    
-    
 
 <!DOCTYPE html>
 <html>

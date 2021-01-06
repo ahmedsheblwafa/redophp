@@ -20,12 +20,6 @@ if($_COOKIE['userRole'] == 'user'){
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-
-
-
-    
-
     <style>
         body {
             /* min-height: 100vh; */
@@ -91,9 +85,6 @@ if($_COOKIE['userRole'] == 'user'){
             $('.col-5').hide();
             $('tr.parent')
                 .on("click", function () {
-                    
-                   
-                    
                      $(this).parent().parent().next().next().next().next().next().toggle();
                     // console.log(idOfParent);
                     // $('tr.child-' + idOfParent).toggle('fast');
@@ -102,18 +93,6 @@ if($_COOKIE['userRole'] == 'user'){
             // $('tr[class^=child-]').hide().children('td');
             
         });
-
-    
-
-        // add and minus
-        // $(function () {
-        //     $('tr.parent td span.btn')
-        //         .on("click", function () {
-        //             var idOfParent = $(this).parents('tr').attr('id');
-        //             $('tr.child-' + idOfParent).toggle('fast');
-        //         });
-        //     $('tr[class^=child-]').hide().children('td');
-        // });
 
     </script>
 
@@ -182,9 +161,7 @@ if($db){
        echo "<option value=".$row['Name'].">".$row['Name']."</option>";
       }
 
-                   
-                
-      
+
   echo"</select></td><td>
   <button type='submit' name='submit'>submit</button></td></tr></table></form>";
 }
@@ -336,17 +313,8 @@ $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
                     
                     
                     ";}
-                                
-                        
-                        
-
-}
-
-
  
-
-
-    
+}
 
     }
 }

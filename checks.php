@@ -106,7 +106,7 @@ if($_COOKIE['userRole'] == 'user'){
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link active"style="color: #fbb448;" >Checks</a>
-        <a href="login.php" class="nav-item nav-link "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+        <a href="login.php" class="nav-item nav-link logout "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>

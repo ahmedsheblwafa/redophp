@@ -104,6 +104,10 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
     <style>
         body {
             /* min-height: 100vh; */
@@ -168,6 +172,8 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
+        <a href="login.php" class="nav-item nav-link logout "style="color: #fbb448; float:right; margin-left:63%" >Logout</a>
+
     </nav>
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
@@ -176,7 +182,7 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
     </div>
 
     <div class="container-fluid d-inlie-block " >
-    <p class="text-success text-center"><?php echo $valid; ?></p>
+    <!-- <p class="text-success text-center"><?php echo $valid; ?></p> -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="form" method="POST" style="margin-left:37%;">
 <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Product Name :</label></div>

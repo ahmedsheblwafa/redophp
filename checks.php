@@ -134,7 +134,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);
 if($db){
 
     // echo "connected";
-    $selQry="select *from systemuser ";
+    $selQry="select * from systemuser ";
   
     $stmt=$db->prepare($selQry);
     $res=$stmt->execute();

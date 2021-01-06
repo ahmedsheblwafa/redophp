@@ -1,6 +1,6 @@
 <?php
 require_once('checkCookies.php');
-require_once("functions.php");
+// require_once("functions.php");
 define("DB_SERVER","localhost");
 define("DB_USER","root");
 define("DB_PASS","");

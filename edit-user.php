@@ -23,12 +23,8 @@ if(isset($_POST['submit'])){
     $res2=$stmt2->execute();
     // header('location:allproducts.php');
 
-}
-   
+} 
 ?> 
-
-    
-    
 
 <!DOCTYPE html>
 <html>

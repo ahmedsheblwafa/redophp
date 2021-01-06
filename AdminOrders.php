@@ -1,34 +1,28 @@
 <?php
-require_once('checkCookies.php');
-define("DB_SERVER", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "cafetria");
-define("DB_PORT","3306");
-$conn=mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME,DB_PORT);
-$result=mysqli_query($conn,"SELECT`order-product`.Quantity ,products.price,products.Pname,products.Category ,
-products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
-from `order-product`, products, Orders,systemuser 
-WHERE Orders.OID=`order-product`.OID 
-and `order-product`.PID=products.PID 
-");
-?>
+
+require_once('checkCookies.php'); 
+
+$dsn="mysql:dbname=cafetria;dbhost=127.0.0.1;dbport=3306";
+Define("DB_USER","root");
+Define("DB_PASS","");
+$db= new PDO($dsn,DB_USER,DB_PASS);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Orders</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<style>
-        body {
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <style>
+        
+        body{
             font-family: "Kaushan Script", cursive !important;
         }
 
@@ -96,11 +90,7 @@ and `order-product`.PID=products.PID
             vertical-align: middle;
         }
 
-
-
-
-
-
+    
 
         .status {
             font-size: 30px;
@@ -133,24 +123,29 @@ and `order-product`.PID=products.PID
             display: flex;
             justify-content: center;
         }
-
         .pic {
             width: 130px;
             height: 130px;
         }
+        img{
+            width: 130px;
+        }
+
+        
     </style>
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-    </script>
-
+    </script> -->
+   
 </head>
+
 <body>
     <!-- nav -->
-    <nav class="nav nav-tabs">
-    <a href="AdminOrders.php" class="nav-item nav-link active"  style="color: #fbb448;">Home</a>
-    <a href="Viewproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
+    <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
+    <a href="AdminOrders.php" class="nav-item nav-link active "  style="color: #fbb448;">Home</a>
+    <a href="allproducts.php" class="nav-item nav-link "  style="color: #fbb448;">Products</a>
         <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
         <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
         <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
@@ -158,139 +153,167 @@ and `order-product`.PID=products.PID
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">
         <h1 class="cursive-font" style='font-family: "Kaushan Script", cursive !important; color:#fbb448 ;'>
-            <img src=logo_size.jpg>Orders <img src=logo_size.jpg>
+            <img src=logo_size.jpg> My Orders <img src=logo_size.jpg>
         </h1>
     </div>
-    <!-- date -->
-    <form method="POST">
-    <table class="col-8" style="left: 20%;">
+    <form method="post" action="">
+     <!-- date -->
+     <table class="col-8" style="left: 20%;">
         <tr>
             <td>
                 <h4 style="display: inline-block;">From :</h4>
             </td>
             <td>
-                <input type="date" name="datefrom">
+                <input type="date" name="from" >
             </td>
             <td>
                 <h4 style="display: inline-block;">To :</h4>
             </td>
             <td>
-                <input type="date" name="dateto">
+                <input type="date" name="to" >
+            </td>
+            <td>
+                <input type="submit" name="submit"> 
             </td>
         </tr>
-        <div>
+               <div>
         </div>
     </table>
-    </form>
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <table class="table table-striped table-hover" style="text-align: center;">
+    <form>
+             <table class="table table-striped table-hover">
                     <thead class="table-title">
                         <tr>
-                            <th style="width: 10%;">Order Date</th>
-                            <th style="width: 10%;">Name</th>
-                            <th style="width: 5%;"> Room</th>
-                            <th style="width: 5%;">Ext</th>
-                          <th style="width: 15%;">Action</th>
+                            <th style="width: 20%;">Name</th>
+                            <th style="width: 20%;">Order Date</th>
+                            <th style="width: 15%;"> Status</th>
+                            <th style="width: 15%;"> total price</th>
+                            <th style="width: 15%;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                      <?php
-                        
-                         while($row=mysqli_fetch_array($result)){
-                         echo"<tr>";
-                         echo"<td>" .$row['OrderDate']."</td>";
-                         echo"<td>" .$row['Name']."</td>";
-                         echo"<td>" .$row['RoomNo']."</td>";
-                         echo"<td>" .$row['Ext']."</td>"; 
-                           echo"<td style='text-align:left;'>
-                            <form method='POST'>
-                            <input type='radio'>Processing
-                            <br>
-                             <input type='radio'>On Delevier
-                             <br>
-                            <input type='radio'>Done
-                            <br>
-                                <input type='radio'>Cancelled
-                                  <br><button type='submit' style='border: none;background-color: transparent;'
-                                        disabled><i class='fas fa-check'>&#xE5C9; </i> </button>
-                                </form>
-                            </td>";
-                         echo"</tr>" ;
-                            echo"<tr>";
-                            echo"<td style='width:15%; display:inline-block'>" ."<img style='width:10px;' src='".$row['PPicPath']. "'> <br>" .$row['Quantity']."</td>";  
-                            echo"</tr>";}?>
-                        <tr>
-                            <!-- <td colspan="20" style=" align-content: center; position: absolute">
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2 d-inline-block">
-                                        <img src="https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2017/09/latte.jpg"
-                                            alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled>25 LE</button>
-                                        </div>
-                                        <h6> Latte</h6>
-                                    </div>
-                                </div>
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2">          
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled>25 LE</button>
-                                        </div>
-                                        <h6> Latte</h6>
-                                    </div>
-                                </div>
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2">
-                                        <img src="https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2017/09/latte.jpg"
-                                            alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled>25 LE</button>
-                                        </div>
-                                        <h6> Latte</h6>
-                                    </div>
-                                </div>
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2">
-                                        <img src="https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2017/09/latte.jpg"
-                                            alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled>25 LE</button>
-                                        </div>
-                                        <h6> Latte</h6>
-                                    </div>
-                                </div>
-                                <div class="card rounded shadow-sm border-0 d-inline-block">
-                                    <div class="card-body p-2">
-                                        <img src="https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2017/09/latte.jpg"
-                                            alt="Latte" class="img-fluid d-block mx-auto mb-3 pic">
-                                        <div class="carousel-caption p-3">
-                                            <button class="price" value="5" disabled>25 LE</button>
-                                        </div>
-                                        <h6> Latte</h6>
-                                    </div>
-                                </div>
 
-                            </td> -->
-                        </tr>
+                    <?php
+                   if($db){
+
+                    // echo "connected";
+                    $selQry="select OID from orders ";
+                  
+                    $stmt=$db->prepare($selQry);
+                    $res=$stmt->execute();
+                    $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                       foreach($rows as $row){
+                         
+                         $id =$row['OID'];  
+
+                         ?>
+                         <?php
+                         
+                         if(isset($_POST['submit'])){
+                    //  var_dump(strtotime($_POST['from']));
+                           $from=$_POST['from'];
+                           $to=$_POST['to'];
+                            $userid = $_COOKIE['userID'];
+                            $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
+                            products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                            from `order-product`, products, Orders,systemuser 
+                            WHERE Orders.OID=`order-product`.OID 
+                            and `order-product`.PID=products.PID 
+                            and Orders.UserId=systemuser.UID
+                            and orders.OID= $id
+                            and OrderDate between '$from' and '$to'
+                            ";
+                     
+                     
+                     
+                     
+                     
+                     
+        
+                     
+                         }else
+                    //    var_dump($id) ;
+                      { 
+                        $userid = $_COOKIE['userID'];
+                          $selQry2="SELECT`order-product`.OID,`order-product`.Quantity ,products.Price,products.Pname,products.Category ,
+                       products.PPicPath,Orders.OrderDate,Orders.Status,systemuser.Name,systemuser.role 
+                       from `order-product`, products, Orders,systemuser 
+                       WHERE Orders.OID=`order-product`.OID 
+                       and `order-product`.PID=products.PID 
+                       and Orders.UserId=systemuser.UID
+                       and orders.OID= $id";}
+                  
+                       $stmt2=$db->prepare($selQry2);
+                       $res2=$stmt2->execute();
+                       $rows2=$stmt2->fetchAll(PDO::FETCH_ASSOC);
+                       if(!count($rows2)==0){
+                       echo"<tr> <td>".$rows2[0]['Name']."</td><td>".$rows2[0]['OrderDate']."</td><td>".$rows2[0]['Status']."</td>";
+                       $sum = 0;
+                       foreach($rows2 as $row){
+                       $sum+= ($row['Price']*$row['Quantity']);
+                            }
+                    echo "<td>".$sum."</td>";
+                       echo"<td><a href='' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9; </i>Cancel Order</a>
+                       </td></tr><tr>";
+
+                          foreach($rows2 as $row){
+                            // echo $row['OID'];
+                            echo "<td class='text-center'>";
+                            $img = $row["PPicPath"];
+                            echo '<img src="images/'.$img.'" ><br>'.$row["Quantity"].'
+                            <br>'.$row["Pname"].'<br>'.$row["Price"]."LE <br>".$row["Price"]*$row["Quantity"]
+                            ;
+                            
+                            
+                            echo"</td>
+                            ";
+
+
+
+
+
+
+
+
+                          }
+                          echo "</tr>";
+               
+                }}}
+                        ?>
+                   
                     </tbody>
-                </table>
+                </table> 
+                
+                
+                <!-- <script>
+        // view and hide
+        $(function () {
+            $('.parent')
+                .on("click", function () {
+                    $(this).next().toggle();
+                    return false;
+                    // var idOfParent = $(this).parents('tr').attr('id');
+                 // $('tr.child-' + idOfParent).toggle('fast');
+                });
+            $('.child-').hide().children('td');
+        });
+    </script>  -->
+    
 
-            </div>
-        </div>
-    </div>
 </body>
-
-
 <script>
-    $(".logout").click(function () {
+$(".logout").click(function () {
             $.post('checkCookies.php',{
                 cook: 'delete'
             },function(){
                window.location.replace("login.php");
             });
         })
-        </script>
+
+</script>
+
 
 </html>
+
+
+
+      

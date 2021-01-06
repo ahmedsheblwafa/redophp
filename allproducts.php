@@ -213,13 +213,12 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
     </script>
 </head>
 <body>
-    <nav class="nav nav-tabs" >
-        <a href="#" class="nav-item nav-link ">Home</a>
-        <a href="#" class="nav-item nav-link active" style="color: #fbb448;">Products</a>
-        <a href="users.html" class="nav-item nav-link ">Users</a>
-        <a href="#" class="nav-item nav-link ">Manual Order</a>
-        <a href="#" class="nav-item nav-link ">Checks</a>
-        <!-- <a href="#" class="nav-item nav-link " style="float: right;"><img src="" > Admin</a> -->
+<nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
+    <a href="AdminOrders.php" class="nav-item nav-link  "  style="color: #fbb448;">Home</a>
+    <a href="allproducts.php" class="nav-item nav-link  active"  style="color: #fbb448;">Products</a>
+        <a href="allusers.php" class="nav-item nav-link "  style="color: #fbb448;">Users</a>
+        <a href="adminmenue.php" class="nav-item nav-link  "  style="color: #fbb448;">Manual Order</a>
+        <a href="checks.php" class="nav-item nav-link "style="color: #fbb448;" >Checks</a>
     </nav>
     <div class="container-xl">
         <div class="table-responsive">
@@ -249,7 +248,7 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                         echo "<tr>";
                         echo"<td>" .$row['Pname']."</td>";
                          echo"<td>" .$row['Price']."</td>";
-                       echo"<td><img style='width:125px;height:100px' src='".$row['PPicPath']."'></td>";
+                       echo"<td><img style='width:125px;height:100px' src='images/".$row['PPicPath']."'></td>";
                        echo "<td>";?>
                       <a class="action" href="<?php echo 'showproduct.php?id='.$row['PID']; ?>">          
                       <i class="fas fa-eye"></i>

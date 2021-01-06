@@ -104,6 +104,10 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+
     <style>
         body {
             /* min-height: 100vh; */
@@ -177,7 +181,7 @@ if(mysqli_query($conn ,"INSERT INTO products (Pname, Price, Category, PPicPath) 
     </div>
 
     <div class="container-fluid d-inlie-block " >
-    <p class="text-success text-center"><?php echo $valid; ?></p>
+    <!-- <p class="text-success text-center"><?php echo $valid; ?></p> -->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" name="form" method="POST" style="margin-left:37%;">
 <div class="row my-3">
                 <div class="col-lg-3 "><label for="name">Product Name :</label></div>

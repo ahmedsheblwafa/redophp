@@ -148,7 +148,7 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
     <nav class="nav nav-tabs" style="background-color: rgba(42, 41, 41, 0.762);width: 100%;">
         <a href="newuserhome.php" class="nav-item nav-link " style="color: #fbb448;">Home</a>
         <a href="#" class="nav-item nav-link active">My Orders</a>
-        <a href="login.php" class="nav-item nav-link logout"style="color: #fbb448; float:right; margin-left:80%" >Logout</a>
+        <a href="login.php" class="nav-item nav-link logout "style="color: #fbb448; float:right; margin-left:80%" >Logout</a>
     </nav>
     <!-- header -->
     <div class="container-fluid d-block py-4" style="text-align: center;">

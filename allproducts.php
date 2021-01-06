@@ -243,16 +243,13 @@ $result = mysqli_query($conn,"SELECT PID,Pname,Price,PPicPath FROM products");
                         </tr>
                     </thead>
                     <tbody>
-                        
                   <?php while($row=mysqli_fetch_array($result)) {
                         echo "<tr>";
                         echo"<td>" .$row['Pname']."</td>";
                          echo"<td>" .$row['Price']."</td>";
                        echo"<td><img style='width:125px;height:100px' src='images/".$row['PPicPath']."'></td>";
                        echo "<td>";?>
-                      <a class="action" href="<?php echo 'showproduct.php?id='.$row['PID']; ?>">          
-                      <i class="fas fa-eye"></i>
-                    <a class="action" href="<?php echo 'edproduct.php?id='.$row['PID']; ?>">   
+                    <a class="action" href="<?php echo 'edit-product.php?id='.$row['PID']; ?>">   
                       <i class='fa fa-pencil' style='color:#fbb448;'></i></a>
                       <a class="action" href="<?php echo 'delete.php?id='.$row['PID']; ?>">          
                         <i class='material-icons' style='color:red;'>&#xE5C9</i></a>

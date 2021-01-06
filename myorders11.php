@@ -21,7 +21,6 @@ $db= new PDO($dsn,DB_USER,DB_PASS);?>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
     <style>
-        
         body{
             font-family: "Kaushan Script", cursive !important;
         }

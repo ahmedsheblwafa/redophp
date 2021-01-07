@@ -210,7 +210,7 @@ if(isset($_POST['submit']))
         
       
         setcookie('login','true');
-        setcookie('login',$id);
+        setcookie('userID',$id);
 
         $_SESSION['email']= $email;  // Initializing Session with value of PHP Variable
         echo $_SESSION['email'];   
